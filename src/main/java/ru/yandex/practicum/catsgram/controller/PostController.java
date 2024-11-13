@@ -15,7 +15,6 @@ import java.util.Map;
 public class PostController {
 
     private final Map<Long, Post> posts = new HashMap<>();
-
     @GetMapping
     public Collection<Post> findAll() {
         return posts.values();
