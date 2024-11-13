@@ -14,7 +14,7 @@ import java.util.Map;
 @RequestMapping("/users")
 public class UserController {
 
-private final Map<Long, User> users = new HashMap<>();
+    private final Map<Long, User> users = new HashMap<>();
 
     @GetMapping
     public Collection<User> findAll() {
@@ -22,12 +22,12 @@ private final Map<Long, User> users = new HashMap<>();
     }
 
     @PostMapping
-    public User create (@RequestBody User user){
+    public User create(@RequestBody User user) {
         String email = String.valueOf(users.containsKey(user.getEmail()));
-        if (user.getEmail() == null || user.getPassword().isBlank()){
+        if (user.getEmail() == null || user.getPassword().isBlank()) {
             throw new ConditionsNotMetException("Имейл должен быть указан");
         }
-        if (user.getEmail().equals(email)){
+        if (user.getEmail().equals(email)) {
             throw new DuplicatedDataException("Этот имейл уже используется");
         }
         user.setEmail(user.getEmail());
@@ -39,15 +39,15 @@ private final Map<Long, User> users = new HashMap<>();
     }
 
     @PutMapping
-    public User put (@RequestBody User user){
+    public User put(@RequestBody User user) {
         String email = String.valueOf(users.containsKey(user.getEmail()));
-        if (user.getId() == null){
+        if (user.getId() == null) {
             throw new ConditionsNotMetException("Id должен быть указан");
         }
-        if (user.getPassword().equals(email)){
+        if (user.getPassword().equals(email)) {
             throw new DuplicatedDataException("Этот имейл уже используется");
         }
-        if (user.getPassword() == null || user.getUsername() == null || user.getEmail() == null){
+        if (user.getPassword() == null || user.getUsername() == null || user.getEmail() == null) {
             return user;
         }
         user.setEmail(user.getEmail());
@@ -56,7 +56,6 @@ private final Map<Long, User> users = new HashMap<>();
         users.put(user.getId(), user);
         return user;
     }
-
 
 
     private long getNextId() {
