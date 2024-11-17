@@ -1,15 +1,11 @@
 package ru.yandex.practicum.catsgram.controller;
 
 import org.springframework.web.bind.annotation.*;
-import ru.yandex.practicum.catsgram.exception.ConditionsNotMetException;
-import ru.yandex.practicum.catsgram.exception.NotFoundException;
 import ru.yandex.practicum.catsgram.model.Post;
 import ru.yandex.practicum.catsgram.service.PostService;
 
-import java.time.Instant;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/posts")
@@ -34,5 +30,10 @@ public class PostController {
     @PutMapping
     public Post update(@RequestBody Post newPost) {
         return postService.update(newPost);
+    }
+
+    @GetMapping("/posts/{postId}")
+    public Optional<Post> findById(@PathVariable Long postId){
+        return postService.findPostById(postId);
     }
 }
