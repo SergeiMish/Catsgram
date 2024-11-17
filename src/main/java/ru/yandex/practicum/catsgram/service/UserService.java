@@ -1,5 +1,6 @@
 package ru.yandex.practicum.catsgram.service;
 
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -12,7 +13,7 @@ import java.time.Instant;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-
+@Service
 public class UserService {
 
     private final Map<Long, User> users = new HashMap<>();
