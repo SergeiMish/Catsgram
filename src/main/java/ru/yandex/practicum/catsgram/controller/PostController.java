@@ -16,7 +16,7 @@ import java.util.Map;
 public class PostController {
 
     private final PostService postService;
-    private final Map<Long, Post> posts = new HashMap<>();
+
     public PostController(PostService postService) {
         this.postService = postService;
     }
