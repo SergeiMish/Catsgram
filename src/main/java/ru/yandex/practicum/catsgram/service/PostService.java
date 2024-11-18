@@ -11,10 +11,8 @@ import ru.yandex.practicum.catsgram.model.Post;
 
 import java.time.Instant;
 import java.time.LocalDate;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 // Указываем, что класс PostService - является бином и его
 // нужно добавить в контекст приложения
@@ -28,10 +26,20 @@ public class PostService {
         this.userService = userService;
     }
 
-    public Collection<Post> findAll(@PathVariable @NonNull int size,
-                                    @PathVariable int from,
-                                    @PathVariable String sort){
+    public List<Post> findAll(int size, int from, @NonNull String sort) {
+        SortOrder sortOrder = SortOrder.from(sort);
 
+        return posts.values().stream()
+                .sorted((p1, p2) -> {
+                    if (sortOrder == SortOrder.ASCENDING) {
+                        return p1.getPostDate().compareTo(p2.getPostDate());
+                    } else {
+                        return p2.getPostDate().compareTo(p1.getPostDate());
+                    }
+                })
+                .skip(from)
+                .limit(size)
+                .collect(Collectors.toList());
     }
     public enum SortOrder {
         ASCENDING, DESCENDING;
