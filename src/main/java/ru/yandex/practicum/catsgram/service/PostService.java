@@ -1,11 +1,16 @@
 package ru.yandex.practicum.catsgram.service;
 
+import lombok.NonNull;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import ru.yandex.practicum.catsgram.exception.ConditionsNotMetException;
 import ru.yandex.practicum.catsgram.exception.NotFoundException;
 import ru.yandex.practicum.catsgram.model.Post;
 
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -23,7 +28,11 @@ public class PostService {
         this.userService = userService;
     }
 
-    public Collection<Post> findAll() {
+    public Collection<Post> findAll(@PathVariable @NonNull int size,
+                                    @PathVariable int from,
+                                    @PathVariable String sort){
+
+
         return posts.values();
     }
 
