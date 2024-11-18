@@ -32,8 +32,22 @@ public class PostService {
                                     @PathVariable int from,
                                     @PathVariable String sort){
 
+    }
+    public enum SortOrder {
+        ASCENDING, DESCENDING;
 
-        return posts.values();
+        // Преобразует строку в элемент перечисления
+        public static SortOrder from(String order) {
+            switch (order.toLowerCase()) {
+                case "ascending":
+                case "asc":
+                    return ASCENDING;
+                case "descending":
+                case "desc":
+                    return DESCENDING;
+                default: return null;
+            }
+        }
     }
 
     public Post create(Post post) {
