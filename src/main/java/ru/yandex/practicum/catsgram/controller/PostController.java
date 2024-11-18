@@ -32,7 +32,7 @@ public class PostController {
         return postService.update(newPost);
     }
 
-    @GetMapping("/posts/{postId}")
+    @GetMapping("/{postId}")
     public Optional<Post> findById(@PathVariable Long postId){
         return postService.findPostById(postId);
     }
